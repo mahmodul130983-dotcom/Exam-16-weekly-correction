@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exam Results Dashboard</title>
-  
+  <title>Admin Dashboard - 16th Weekly Exam</title>
+
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,11 +21,11 @@
       --primary-hover: #4f46e5;
       --secondary: #ec4899;
       --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
-      --card-bg: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --card-bg: rgba(255, 255, 255, 0.07);
+      --card-border: rgba(255, 255, 255, 0.15);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      
+
       --correct-text: #4ade80;
       --wrong-text: #f87171;
       --skipped-text: #fbbf24;
@@ -44,17 +44,15 @@
       background: var(--bg-gradient);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 30px 16px;
-      overflow-x: hidden;
+      padding: 24px 16px;
     }
 
-    /* Ambient Floating Background Effects */
+    /* Floating Ambient Elements */
     .ambient-bg {
       position: fixed;
       width: 100vw;
       height: 100vh;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       z-index: -1;
       overflow: hidden;
       pointer-events: none;
@@ -65,344 +63,270 @@
       border-radius: 50%;
       filter: blur(120px);
       opacity: 0.3;
-      animation: float 12s infinite alternate ease-in-out;
     }
 
-    .circle-1 {
-      width: 450px;
-      height: 450px;
-      background: #4f46e5;
-      top: -100px;
-      left: -100px;
-    }
-
-    .circle-2 {
-      width: 500px;
-      height: 500px;
-      background: #db2777;
-      bottom: -150px;
-      right: -100px;
-      animation-delay: -6s;
-    }
-
-    @keyframes float {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(50px, 60px) scale(1.1); }
-    }
+    .circle-1 { width: 400px; height: 400px; background: #4f46e5; top: -50px; left: -50px; }
+    .circle-2 { width: 450px; height: 450px; background: #db2777; bottom: -100px; right: -50px; }
 
     .container {
-      max-width: 1050px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
-    /* Header Section */
-    .header-panel {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .badge-tag {
-      display: inline-flex;
+    /* Dashboard Header */
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      background: rgba(99, 102, 241, 0.2);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #a5b4fc;
-      padding: 6px 18px;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .header-panel h1 {
-      font-size: 32px;
-      font-weight: 800;
+    .title-area h1 {
+      font-size: 28px;
+      font-weight: 700;
       background: linear-gradient(to right, #ffffff, #c7d2fe);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
     }
 
-    .header-panel p {
+    .title-area p {
       color: var(--text-muted);
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    /* Summary Analytics Cards */
-    .analytics-grid {
+    /* Stat Overview Cards */
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .stat-card {
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(16px);
       border: 1px solid var(--card-border);
-      padding: 20px;
       border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      padding: 20px;
       display: flex;
       align-items: center;
       gap: 16px;
-      transition: transform 0.2s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .stat-icon {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       border-radius: 14px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      background: rgba(99, 102, 241, 0.2);
       color: #818cf8;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 22px;
+      font-size: 20px;
     }
 
     .stat-info h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .stat-info p {
       font-size: 13px;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
     }
 
-    .stat-info .value {
-      font-size: 26px;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    /* Control Toolbar (Search, Select All, Bulk Delete) */
-    .toolbar-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .search-input-wrapper {
-      position: relative;
-      flex: 1;
-      min-width: 260px;
-    }
-
-    .search-input-wrapper i {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 16px 12px 46px;
-      font-size: 15px;
-      color: var(--text-main);
-      background: rgba(15, 23, 42, 0.6);
-      border: 1.5px solid var(--card-border);
-      border-radius: 12px;
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .search-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
-    }
-
-    .toolbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .select-all-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-      padding: 8px 12px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-    }
-
-    .btn-delete-bulk {
-      background: rgba(239, 68, 68, 0.2);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #f87171;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 700;
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .btn-delete-bulk:hover:not(:disabled) {
-      background: rgba(239, 68, 68, 0.35);
-      transform: translateY(-1px);
-    }
-
-    .btn-delete-bulk:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    /* Result Student Card */
-    .result-card {
+    /* Table & Controls Box */
+    .content-box {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 24px;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-      position: relative;
+      box-shadow: var(--glass-shadow);
     }
 
-    .result-card:hover {
-      border-color: rgba(99, 102, 241, 0.3);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-top {
+    .controls-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 14px;
-      margin-bottom: 16px;
-    }
-
-    .student-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .custom-checkbox {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--primary);
-      cursor: pointer;
-    }
-
-    .student-name {
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .score-badge {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #a5b4fc;
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-weight: 800;
-      font-size: 16px;
-    }
-
-    .stats-row {
-      display: flex;
-      gap: 20px;
-      font-size: 14px;
-      background: rgba(15, 23, 42, 0.4);
-      padding: 12px 18px;
-      border-radius: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .stats-row span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .search-input-box {
+      position: relative;
+      flex: 1;
+      max-width: 320px;
     }
 
-    .wrong-sec-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #f87171;
-      margin-bottom: 12px;
-      display: flex;
+    .search-input-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input-box input {
+      width: 100%;
+      padding: 10px 14px 10px 40px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search-input-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .wrong-item {
-      background: rgba(239, 68, 68, 0.08);
-      border-left: 4px solid #ef4444;
-      padding: 12px 16px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .wrong-item strong {
-      display: block;
-      color: #fca5a5;
-      margin-bottom: 6px;
-    }
-
-    .card-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 14px;
-    }
-
-    .single-delete-btn {
-      background: transparent;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #f87171;
-      padding: 6px 14px;
-      font-size: 13px;
-      border-radius: 8px;
-      cursor: pointer;
       transition: all 0.2s;
     }
 
-    .single-delete-btn:hover {
-      background: rgba(239, 68, 68, 0.2);
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .loader {
-      text-align: center;
-      padding: 50px;
-      font-size: 16px;
-      color: var(--text-muted);
+    .btn-export {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
     }
+
+    /* Table Design */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.8);
+      color: #cbd5e1;
+      padding: 14px 16px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #f1f5f9;
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .score-badge {
+      font-weight: 700;
+      color: #818cf8;
+      background: rgba(99, 102, 241, 0.15);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-view {
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-view:hover {
+      background: rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-delete {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      margin-left: 6px;
+    }
+
+    .btn-delete:hover {
+      background: rgba(239, 68, 68, 0.4);
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: rgba(30, 27, 75, 0.95);
+      border: 1px solid var(--card-border);
+      padding: 24px;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .wrong-q-item {
+      background: rgba(15, 23, 42, 0.6);
+      border-left: 3px solid var(--wrong-text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .wrong-q-item div { margin-bottom: 4px; }
   </style>
 </head>
 <body>
 
-  <!-- Background Ambient Lights -->
   <div class="ambient-bg">
     <div class="circle-1"></div>
     <div class="circle-2"></div>
@@ -410,71 +334,105 @@
 
   <div class="container">
     
-    <!-- Header -->
-    <div class="header-panel">
-      <div class="badge-tag">
-        <i class="fa-solid fa-shield-halved"></i> ADMIN CONTROL CENTER
+    <!-- Top Bar -->
+    <div class="admin-header">
+      <div class="title-area">
+        <h1>Admin Control Panel</h1>
+        <p>16th Weekly Correction Exam Results Dashboard</p>
       </div>
-      <h1>EXAM ANALYTICS & RESULTS</h1>
-      <p>DU B UNIT 16TH EXAM RESULTS DASHBOARD</p>
+      <button class="btn-action btn-export" onclick="exportToCSV()">
+        <i class="fa-solid fa-file-excel"></i> Export CSV
+      </button>
     </div>
 
-    <!-- Live Statistics Cards -->
-    <div class="analytics-grid">
+    <!-- Analytics Stats -->
+    <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
         <div class="stat-info">
-          <h3>Total Student</h3>
-          <div class="value" id="total-students">0</div>
+          <h3 id="total-students">0</h3>
+          <p>Total Examinees</p>
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="color: #4ade80; background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.3);"><i class="fa-solid fa-trophy"></i></div>
+        <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
         <div class="stat-info">
-          <h3>Highest score</h3>
-          <div class="value" id="top-score">0.00</div>
+          <h3 id="avg-score">0.00</h3>
+          <p>Average Score</p>
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon" style="color: #ec4899; background: rgba(236, 72, 153, 0.15); border-color: rgba(236, 72, 153, 0.3);"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
         <div class="stat-info">
-          <h3>Avg Number</h3>
-          <div class="value" id="avg-score">0.00</div>
+          <h3 id="highest-score">0.00</h3>
+          <p>Highest Score</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="stat-info">
+          <h3 id="avg-accuracy">0%</h3>
+          <p>Avg. Accuracy</p>
         </div>
       </div>
     </div>
 
-    <!-- Search & Bulk Action Toolbar -->
-    <div class="toolbar-card">
-      <div class="search-input-wrapper">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="search-input" class="search-input" placeholder="Search name.." onkeyup="filterResults()">
-      </div>
-
-      <div class="toolbar-actions">
-        <label class="select-all-btn">
-          <input type="checkbox" id="select-all-checkbox" onchange="toggleSelectAll(this)">
-        select all
-        </label>
-
-        <button class="btn-delete-bulk" id="bulk-delete-btn" onclick="deleteSelectedRecords()" disabled>
-          <i class="fa-solid fa-trash-can"></i> delete all selected(<span id="selected-count">0</span>)
+    <!-- Main Results Table Card -->
+    <div class="content-box">
+      <div class="controls-bar">
+        <div class="search-input-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="search-name" onkeyup="filterResults()" placeholder="Search by student name...">
+        </div>
+        <button class="btn-action" onclick="fetchResults()">
+          <i class="fa-solid fa-rotate-right"></i> Refresh Data
         </button>
       </div>
-    </div>
 
-    <!-- Results List -->
-    <div id="results-container">
-      <div class="loader">
-        <i class="fa-solid fa-circle-notch fa-spin fa-2x" style="color: var(--primary); margin-bottom: 12px; display: block;"></i>
-        data loading please wait...
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Student Name</th>
+              <th>Score (/85)</th>
+              <th>Right</th>
+              <th>Wrong</th>
+              <th>Skipped</th>
+              <th>Accuracy</th>
+              <th>Submitted At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="results-table-body">
+            <tr>
+              <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                Loading exam results...
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
   </div>
 
+  <!-- Detailed Modal for Reviewing Wrong Answers -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 id="modal-student-name" style="color: #fff; font-size: 18px;">Student Details</h3>
+        <button class="btn-action" style="padding: 4px 10px;" onclick="closeModal()">✕</button>
+      </div>
+      <h4 style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">Wrong Questions Breakdown:</h4>
+      <div id="wrong-questions-list">
+        <!-- Dynamically rendered -->
+      </div>
+    </div>
+  </div>
+
   <script>
-    // ⚙️ Firebase Configuration
+    // Firebase Configuration (Matching index.html)
     const firebaseConfig = {
       apiKey: "AIzaSyCTgSqtcDRtvfbIECDFEv_2jAEgModArXc",
       authDomain: "gk-exam-2.firebaseapp.com",
@@ -487,217 +445,174 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const resultsContainer = document.getElementById('results-container');
-    const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
-    const selectedCountSpan = document.getElementById('selected-count');
+    let allResults = [];
 
-    let allExamData = [];
-    let selectedDocIds = new Set();
-
-    // Fetch All Exam Data from Firestore Collection "quiz_results 10"
+    // Fetch All Exam Data from Firestore
     function fetchResults() {
-      db.collection("quiz_results 16").orderBy("submittedAt", "desc").get()
-      .then((querySnapshot) => {
-        allExamData = [];
-        selectedDocIds.clear();
-        updateBulkDeleteButton();
+      const tbody = document.getElementById('results-table-body');
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 20px;">Loading exam results...</td></tr>`;
 
-        if (querySnapshot.empty) {
-          resultsContainer.innerHTML = '<p style="text-align:center; padding: 50px; color: var(--text-muted);">এখনও কেউ পরীক্ষা দেয়নি বা কোনো রেকর্ড নেই।</p>';
-          calculateAnalytics([]);
-          return;
-        }
+      db.collection("quiz_results 16")
+        .get()
+        .then((querySnapshot) => {
+          allResults = [];
+          querySnapshot.forEach((doc) => {
+            allResults.push({ id: doc.id, ...doc.data() });
+          });
 
-        querySnapshot.forEach((doc) => {
-          allExamData.push({ id: doc.id, ...doc.data() });
+          // Sort by submitted time descending
+          allResults.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+          updateDashboardStats();
+          renderTable(allResults);
+        })
+        .catch((error) => {
+          console.error("Error fetching data: ", error);
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--wrong-text);">Failed to load results. Please check internet connection.</td></tr>`;
         });
+    }
 
-        calculateAnalytics(allExamData);
-        renderResults(allExamData);
-      })
-      .catch((error) => {
-        console.error("ডাটা লোড করতে সমস্যা হয়েছে: ", error);
-        resultsContainer.innerHTML = '<p style="color:#f87171; text-align:center; padding: 40px;">ডাটা লোড করতে সমস্যা হয়েছে। ফায়ারবেজ কানেকশন চেক করুন।</p>';
+    // Render Table Rows
+    function renderTable(dataList) {
+      const tbody = document.getElementById('results-table-body');
+      tbody.innerHTML = '';
+
+      if (dataList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">No exam records found.</td></tr>`;
+        return;
+      }
+
+      dataList.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        const formattedDate = item.submittedAt ? new Date(item.submittedAt).toLocaleString('en-GB', { hour12: true }) : 'N/A';
+
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td style="font-weight: 600;">${escapeHtml(item.studentName || 'N/A')}</td>
+          <td><span class="score-badge">${item.totalScore}</span></td>
+          <td style="color: var(--correct-text);">${item.correctAnswers}</td>
+          <td style="color: var(--wrong-text);">${item.wrongAnswers}</td>
+          <td style="color: var(--skipped-text);">${item.skippedQuestions}</td>
+          <td>${item.accuracyPercentage}%</td>
+          <td style="font-size: 12px; color: var(--text-muted);">${formattedDate}</td>
+          <td>
+            <button class="btn-sm btn-view" onclick="openDetails('${item.id}')"><i class="fa-solid fa-eye"></i> View</button>
+            <button class="btn-sm btn-delete" onclick="deleteRecord('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
       });
     }
 
-    // Analytics Calculation
-    function calculateAnalytics(dataList) {
-      const total = dataList.length;
+    // Calculate & Display Overall Stats
+    function updateDashboardStats() {
+      const total = allResults.length;
       document.getElementById('total-students').innerText = total;
 
       if (total === 0) {
-        document.getElementById('top-score').innerText = "0.00";
-        document.getElementById('avg-score').innerText = "0.00";
+        document.getElementById('avg-score').innerText = '0.00';
+        document.getElementById('highest-score').innerText = '0.00';
+        document.getElementById('avg-accuracy').innerText = '0%';
         return;
       }
 
-      const scores = dataList.map(item => parseFloat(item.totalScore || item.score) || 0);
-      const maxScore = Math.max(...scores);
-      const sumScore = scores.reduce((a, b) => a + b, 0);
-      const avgScore = (sumScore / total).toFixed(2);
+      let scoreSum = 0;
+      let accuracySum = 0;
+      let highest = 0;
 
-      document.getElementById('top-score').innerText = maxScore.toFixed(2);
-      document.getElementById('avg-score').innerText = avgScore;
-    }
+      allResults.forEach(item => {
+        const score = parseFloat(item.totalScore) || 0;
+        const accuracy = parseFloat(item.accuracyPercentage) || 0;
 
-    // Render Student Cards
-    function renderResults(dataList) {
-      resultsContainer.innerHTML = '';
-
-      if (dataList.length === 0) {
-        resultsContainer.innerHTML = '<p style="text-align:center; color: var(--text-muted); padding: 30px;">কোনো ফলাফল পাওয়া যায়নি!</p>';
-        return;
-      }
-
-      dataList.forEach((data) => {
-        let wrongListHTML = '';
-        const wrongItems = data.wrongQuestionsBreakdown || data.wrongQuestions || [];
-
-        if (wrongItems.length > 0) {
-          wrongItems.forEach((item) => {
-            wrongListHTML += `
-              <div class="wrong-item">
-                <strong>${item.questionText || item.question}</strong>
-                <div>Your answer: <span style="color: var(--wrong-text); font-weight:600;">${item.givenAnswer || item.selectedAnswer}</span></div>
-                <div>Right Answer: <span style="color: var(--correct-text); font-weight:600;">${item.correctAnswer}</span></div>
-              </div>
-            `;
-          });
-        } else {
-          wrongListHTML = '<p style="color:var(--correct-text); font-weight:600; margin: 6px 0;"><i class="fa-solid fa-circle-check"></i> চমৎকার! কোনো প্রশ্ন ভুল করেনি (সব সঠিক)</p>';
-        }
-
-        const isChecked = selectedDocIds.has(data.id) ? 'checked' : '';
-        const studentName = data.studentName || data.name || 'Unknown student';
-        const finalScore = data.totalScore || data.score || '০.০০';
-        const correctCount = data.correctAnswers !== undefined ? data.correctAnswers : (data.correct || 0);
-        const wrongCount = data.wrongAnswers !== undefined ? data.wrongAnswers : (data.wrong || 0);
-        const skippedCount = data.skippedQuestions !== undefined ? data.skippedQuestions : (data.skipped || 0);
-        
-        // Date formatting
-        let displayDate = 'N/A';
-        if (data.submittedAt) {
-          displayDate = new Date(data.submittedAt).toLocaleString('bn-BD');
-        } else if (data.time) {
-          displayDate = new Date(data.time.toDate()).toLocaleString('bn-BD');
-        }
-
-        const cardHTML = `
-          <div class="result-card">
-            <div class="card-top">
-              <div class="student-meta">
-                <input type="checkbox" class="custom-checkbox item-checkbox" value="${data.id}" ${isChecked} onchange="toggleSelectDoc('${data.id}', this.checked)">
-                <div class="student-name"><i class="fa-solid fa-user-graduate" style="color:#818cf8; font-size: 16px; margin-right: 6px;"></i> ${studentName}</div>
-              </div>
-              <div class="score-badge">স্কোর: ${finalScore}</div>
-            </div>
-
-            <div class="stats-row">
-              <span><i class="fa-solid fa-circle-check" style="color:var(--correct-text);"></i> Right: <strong>${correctCount}</strong></span>
-              <span><i class="fa-solid fa-circle-xmark" style="color:var(--wrong-text);"></i> Wrong: <strong>${wrongCount}</strong></span>
-              <span><i class="fa-solid fa-forward" style="color:var(--skipped-text);"></i> Skip: <strong>${skippedCount}</strong></span>
-              <span><i class="fa-regular fa-clock" style="color:var(--text-muted);"></i> ${displayDate}</span>
-            </div>
-
-            <div class="wrong-sec-title"><i class="fa-solid fa-triangle-exclamation"></i> Wrong answer list:</div>
-            ${wrongListHTML}
-
-            <div class="card-actions">
-              <button class="single-delete-btn" onclick="deleteSingleRecord('${data.id}', '${studentName}')">
-                <i class="fa-solid fa-trash"></i> delete
-              </button>
-            </div>
-          </div>
-        `;
-
-        resultsContainer.innerHTML += cardHTML;
+        scoreSum += score;
+        accuracySum += accuracy;
+        if (score > highest) highest = score;
       });
+
+      document.getElementById('avg-score').innerText = (scoreSum / total).toFixed(2);
+      document.getElementById('highest-score').innerText = highest.toFixed(2);
+      document.getElementById('avg-accuracy').innerText = `${(accuracySum / total).toFixed(1)}%`;
     }
 
-    // Select Individual Checkbox
-    function toggleSelectDoc(id, isChecked) {
-      if (isChecked) {
-        selectedDocIds.add(id);
-      } else {
-        selectedDocIds.delete(id);
-      }
-      updateBulkDeleteButton();
-    }
-
-    // Select All Checkboxes
-    function toggleSelectAll(masterCheckbox) {
-      const checkboxes = document.querySelectorAll('.item-checkbox');
-      checkboxes.forEach(cb => {
-        cb.checked = masterCheckbox.checked;
-        if (masterCheckbox.checked) {
-          selectedDocIds.add(cb.value);
-        } else {
-          selectedDocIds.delete(cb.value);
-        }
-      });
-      updateBulkDeleteButton();
-    }
-
-    // Update Toolbar Delete Button State
-    function updateBulkDeleteButton() {
-      const count = selectedDocIds.size;
-      selectedCountSpan.innerText = count;
-      bulkDeleteBtn.disabled = count === 0;
-      
-      const selectAllCb = document.getElementById('select-all-checkbox');
-      const allCheckboxes = document.querySelectorAll('.item-checkbox');
-      if (allCheckboxes.length > 0 && count === allCheckboxes.length) {
-        selectAllCb.checked = true;
-      } else {
-        selectAllCb.checked = false;
-      }
-    }
-
-    // Delete Single Record
-    function deleteSingleRecord(docId, studentName) {
-      if (confirm(`আপনি কি '${studentName}'-এর এই রেজাল্টটি ডিলিট করতে চান?`)) {
-        db.collection("quiz_results 16").doc(docId).delete()
-        .then(() => {
-          fetchResults();
-        })
-        .catch(err => console.error("ডিলিট করতে সমস্যা হয়েছে: ", err));
-      }
-    }
-
-    // Delete Selected Records in Bulk
-    function deleteSelectedRecords() {
-      const count = selectedDocIds.size;
-      if (count === 0) return;
-
-      if (confirm(`আপনি কি সিলেক্ট করা ${count}টি রেকর্ড ডিলিট করতে চান?`)) {
-        const batch = db.batch();
-        selectedDocIds.forEach(id => {
-          const docRef = db.collection("quiz_results 16").doc(id);
-          batch.delete(docRef);
-        });
-
-        batch.commit()
-        .then(() => {
-          alert(`${count}টি রেকর্ড সফলভাবে মুছে ফেলা হয়েছে!`);
-          fetchResults();
-        })
-        .catch(err => console.error("বাল্ক ডিলিট করতে সমস্যা হয়েছে: ", err));
-      }
-    }
-
-    // Search Filter
+    // Filter By Search Input
     function filterResults() {
-      const query = document.getElementById('search-input').value.toLowerCase().trim();
-      const filtered = allExamData.filter(student => {
-        const name = (student.studentName || student.name || '').toLowerCase();
-        return name.includes(query);
-      });
-      renderResults(filtered);
+      const searchTerm = document.getElementById('search-name').value.toLowerCase();
+      const filtered = allResults.filter(r => (r.studentName || '').toLowerCase().includes(searchTerm));
+      renderTable(filtered);
     }
 
-    // Initial Load
-    fetchResults();
+    // View Wrong Answer Breakdown in Modal
+    function openDetails(docId) {
+      const item = allResults.find(r => r.id === docId);
+      if (!item) return;
+
+      document.getElementById('modal-student-name').innerText = `${item.studentName}'s Review`;
+      const wrongList = document.getElementById('wrong-questions-list');
+      wrongList.innerHTML = '';
+
+      if (!item.wrongQuestionsBreakdown || item.wrongQuestionsBreakdown.length === 0) {
+        wrongList.innerHTML = `<p style="color: var(--correct-text); font-size: 14px;">Great! No wrong answers found.</p>`;
+      } else {
+        item.wrongQuestionsBreakdown.forEach(w => {
+          const div = document.createElement('div');
+          div.className = 'wrong-q-item';
+          div.innerHTML = `
+            <div style="color: #fff; font-weight: 600;">Q${w.questionNo}: ${w.questionText}</div>
+            <div style="color: var(--wrong-text);">Your Answer: ${w.givenAnswer}</div>
+            <div style="color: var(--correct-text);">Correct Answer: ${w.correctAnswer}</div>
+          `;
+          wrongList.appendChild(div);
+        });
+      }
+
+      document.getElementById('detail-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('detail-modal').classList.remove('active');
+    }
+
+    // Delete Record
+    function deleteRecord(docId) {
+      if (confirm("Are you sure you want to delete this examinee record?")) {
+        db.collection("quiz_results 16").doc(docId).delete()
+          .then(() => {
+            fetchResults();
+          })
+          .catch(err => alert("Error deleting document: " + err));
+      }
+    }
+
+    // Export Table Data to Excel/CSV
+    function exportToCSV() {
+      if (allResults.length === 0) {
+        alert("No data available to export!");
+        return;
+      }
+
+      let csv = 'Index,Student Name,Total Score,Right Answers,Wrong Answers,Skipped,Accuracy %,Submitted At\n';
+
+      allResults.forEach((item, index) => {
+        csv += `"${index + 1}","${item.studentName}","${item.totalScore}","${item.correctAnswers}","${item.wrongAnswers}","${item.skippedQuestions}","${item.accuracyPercentage}%","${item.submittedAt}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', `Exam_Results_16_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return { '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' }[m];
+      });
+    }
+
+    // Load results on page boot
+    document.addEventListener("DOMContentLoaded", fetchResults);
   </script>
 </body>
 </html>
