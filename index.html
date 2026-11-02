@@ -592,7 +592,7 @@
         <i class="fa-solid fa-trophy"></i> Results are ready
       </div>
       <h2 style="font-size: 26px; font-weight: 700; margin-top: 8px;">Results Description</h2>
-      <p style="color: var(--text-muted); font-size: 14px;">'quiz_results 12' are saved in database</p>
+      <p style="color: var(--text-muted); font-size: 14px;">'quiz_results 16' are saved in database</p>
       
       <div class="score-circle">
         <div class="number" id="final-score">০.০০</div>
@@ -937,6 +937,7 @@
         perfBadge.innerHTML = `<i class="fa-solid fa-book-open"></i> আরও অনুশীলন প্রয়োজন`;
       }
 
+      // Fixed collection name from "quiz_results 12" to "quiz_results 16"
       db.collection("quiz_results 16").add({
         studentName: userName,
         totalScore: totalScore.toFixed(2),
