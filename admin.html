@@ -47,7 +47,6 @@
       padding: 24px 16px;
     }
 
-    /* Floating Ambient Elements */
     .ambient-bg {
       position: fixed;
       width: 100vw;
@@ -73,7 +72,6 @@
       margin: 0 auto;
     }
 
-    /* Dashboard Header */
     .admin-header {
       display: flex;
       justify-content: space-between;
@@ -96,7 +94,6 @@
       font-size: 14px;
     }
 
-    /* Stat Overview Cards */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -138,7 +135,6 @@
       color: var(--text-muted);
     }
 
-    /* Table & Controls Box */
     .content-box {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -210,7 +206,6 @@
       border: none;
     }
 
-    /* Table Design */
     .table-wrapper {
       overflow-x: auto;
     }
@@ -281,7 +276,6 @@
       background: rgba(239, 68, 68, 0.4);
     }
 
-    /* Modal Styling */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -321,8 +315,6 @@
       margin-bottom: 10px;
       font-size: 13px;
     }
-
-    .wrong-q-item div { margin-bottom: 4px; }
   </style>
 </head>
 <body>
@@ -334,7 +326,6 @@
 
   <div class="container">
     
-    <!-- Top Bar -->
     <div class="admin-header">
       <div class="title-area">
         <h1>Admin Control Panel</h1>
@@ -345,7 +336,6 @@
       </button>
     </div>
 
-    <!-- Analytics Stats -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
@@ -377,7 +367,6 @@
       </div>
     </div>
 
-    <!-- Main Results Table Card -->
     <div class="content-box">
       <div class="controls-bar">
         <div class="search-input-box">
@@ -417,22 +406,20 @@
 
   </div>
 
-  <!-- Detailed Modal for Reviewing Wrong Answers -->
+  <!-- Detailed Modal -->
   <div class="modal-overlay" id="detail-modal">
     <div class="modal-content">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <h3 id="modal-student-name" style="color: #fff; font-size: 18px;">Student Details</h3>
         <button class="btn-action" style="padding: 4px 10px;" onclick="closeModal()">✕</button>
       </div>
+      
       <h4 style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">Wrong Questions Breakdown:</h4>
-      <div id="wrong-questions-list">
-        <!-- Dynamically rendered -->
-      </div>
+      <div id="wrong-questions-list"></div>
     </div>
   </div>
 
   <script>
-    // Firebase Configuration (Matching index.html)
     const firebaseConfig = {
       apiKey: "AIzaSyCTgSqtcDRtvfbIECDFEv_2jAEgModArXc",
       authDomain: "gk-exam-2.firebaseapp.com",
@@ -447,7 +434,6 @@
 
     let allResults = [];
 
-    // Fetch All Exam Data from Firestore
     function fetchResults() {
       const tbody = document.getElementById('results-table-body');
       tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 20px;">Loading exam results...</td></tr>`;
@@ -460,7 +446,6 @@
             allResults.push({ id: doc.id, ...doc.data() });
           });
 
-          // Sort by submitted time descending
           allResults.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
 
           updateDashboardStats();
@@ -468,11 +453,10 @@
         })
         .catch((error) => {
           console.error("Error fetching data: ", error);
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--wrong-text);">Failed to load results. Please check internet connection.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--wrong-text);">Failed to load results.</td></tr>`;
         });
     }
 
-    // Render Table Rows
     function renderTable(dataList) {
       const tbody = document.getElementById('results-table-body');
       tbody.innerHTML = '';
@@ -497,14 +481,13 @@
           <td style="font-size: 12px; color: var(--text-muted);">${formattedDate}</td>
           <td>
             <button class="btn-sm btn-view" onclick="openDetails('${item.id}')"><i class="fa-solid fa-eye"></i> View</button>
-            <button class="btn-sm btn-delete" onclick="deleteRecord('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+            <button class="btn-sm btn-delete" onclick="deleteRecord('${item.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
           </td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // Calculate & Display Overall Stats
     function updateDashboardStats() {
       const total = allResults.length;
       document.getElementById('total-students').innerText = total;
@@ -534,14 +517,12 @@
       document.getElementById('avg-accuracy').innerText = `${(accuracySum / total).toFixed(1)}%`;
     }
 
-    // Filter By Search Input
     function filterResults() {
       const searchTerm = document.getElementById('search-name').value.toLowerCase();
       const filtered = allResults.filter(r => (r.studentName || '').toLowerCase().includes(searchTerm));
       renderTable(filtered);
     }
 
-    // View Wrong Answer Breakdown in Modal
     function openDetails(docId) {
       const item = allResults.find(r => r.id === docId);
       if (!item) return;
@@ -572,18 +553,14 @@
       document.getElementById('detail-modal').classList.remove('active');
     }
 
-    // Delete Record
     function deleteRecord(docId) {
       if (confirm("Are you sure you want to delete this examinee record?")) {
         db.collection("quiz_results 16").doc(docId).delete()
-          .then(() => {
-            fetchResults();
-          })
+          .then(() => fetchResults())
           .catch(err => alert("Error deleting document: " + err));
       }
     }
 
-    // Export Table Data to Excel/CSV
     function exportToCSV() {
       if (allResults.length === 0) {
         alert("No data available to export!");
@@ -606,12 +583,12 @@
     }
 
     function escapeHtml(text) {
+      if (!text) return '';
       return text.replace(/[&<>"']/g, function(m) {
-        return { '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' }[m];
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
       });
     }
 
-    // Load results on page boot
     document.addEventListener("DOMContentLoaded", fetchResults);
   </script>
 </body>
